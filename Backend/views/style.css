@@ -205,3 +205,28 @@ div.go {
 	background-position: center;
 	background-size: 15px;
 }
+
+div.maintable {
+	display: flex;
+	flex-direction: row;
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+div.scoremain {
+	display: flex;
+	flex-direction: column;
+	width: 60%;
+	height: 200px;
+	border: 1px solid #C8C8C8;
+}
+
+div.toolmain {
+	display: flex;
+	align-self: flex-end;
+	flex-direction: column;
+	width: 40%;
+	height: 200px;
+	border: 1px solid #C8C8C8;
+}

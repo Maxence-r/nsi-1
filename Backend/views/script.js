@@ -1,5 +1,5 @@
 function gethp() {
-    fetch('http://localhost:3000/hp')
+    fetch('https://maxencelearn-miniature-train-rq79j5qq77xfp49g-3000.preview.app.github.dev/hp')
         .then(response => response.json())
         .then(data => {
             i = 0;
@@ -23,7 +23,7 @@ gethp();
 
 
 function getjj() {
-    fetch('http://localhost:3000/jj')
+    fetch('https://maxencelearn-miniature-train-rq79j5qq77xfp49g-3000.preview.app.github.dev/jj')
         .then(response => response.json())
         .then(data => {
             i = 0;
@@ -38,6 +38,19 @@ function getjj() {
 }
 
 getjj();
+
+
+
+function getid() {
+    input = document.getElementById('input').value;
+    fetch(`https://maxencelearn-miniature-train-rq79j5qq77xfp49g-3000.preview.app.github.dev/auth/${input}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) return document.getElementById('input').style.border = '1px solid red'
+            document.getElementById('input').style.border = '1px solid #C8C8C8'
+            console.log(data);   
+        })
+}
 
 
 

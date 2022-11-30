@@ -31,6 +31,12 @@ router.post('/auth/hp', (req, res) => {
     .catch(error => res.status(400).json({ error }));
 });
 
+router.get('/auth/:id', (req, res) => {
+    Party.findOne({ _id: req.params.id })
+    .then(party => res.json(party))
+    .catch(error => res.status(400).json({ error }));
+});
+
 router.post('/jj', (req, res) => {
     const partyjj = new Partyjj({
         owner: req.body.owner,
