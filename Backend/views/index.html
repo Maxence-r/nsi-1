@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="main">
-      <h1 style="margin-top: 0;" class="section">Parties Harry Potter récentes</h1>
+      <h1 style="margin-top: 0;" id="topview" class="section">Parties Harry Potter récentes</h1>
       <div class="hp">
         <div class="box">
           <ul class="ullist1">
@@ -109,12 +109,23 @@
       </div>
       
     </div>
-    <div class="maintable">
-      <div class="scoremain">
-
-      </div>
+    <div id="scrollto" class="maintable">
       <div class="toolmain">
-        
+        <div class="infostats">
+          <h2 class="stattitle">Statistiques</h2>
+          <div class="divider"></div>
+          <h3 class="stat"><span id="moyenne">8.9</span> en moyenne</h3>
+          <h3 class="stat">Lancé par <span id="statowner">Maxence</span></h3>
+          <h3 class="stat">Cet utilisateur a lancé <span id="launched">-</span> parties</h3>
+        </div>
+      </div>
+      <div class="scoremain">
+        <div class="infoscore">
+          <h2 class="stattitle">Top 140</h2>
+          <div class="divider"></div>
+          <ul id="scorelist" class="score">
+          </ul>
+          </div>
       </div>
     </div>
 </body>

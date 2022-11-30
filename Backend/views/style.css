@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;700;800&display=swap');
 
+*{
+	scroll-behavior: smooth;
+}
+
 body {
 	padding-top: 50px;
 	padding-bottom: 50px;
@@ -16,16 +20,6 @@ div.main {
 	width: 90%;
 	margin-left: auto;
 	margin-right: auto;
-}
-
-@media screen and (min-width: 1700px) and (min-height: 750px) {
-	div.main {
-		height: 100vh;
-		justify-content: center;
-	}
-	body {
-		padding: 0;
-	}
 }
 	
 
@@ -80,7 +74,7 @@ div.box {
 	width: 320px;
 	height: 190px;
 	border-radius: 10px;
-	box-shadow: -4px 5px 30px -4px rgba(198, 198, 198, 0.76);
+	box-shadow: 6px 2px 60px 2px rgba(214, 214, 214, 0.52);
 	margin-top: 18px;
 }
 
@@ -208,25 +202,91 @@ div.go {
 
 div.maintable {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	width: 90%;
 	margin-left: auto;
 	margin-right: auto;
+	display: none;
 }
 
-div.scoremain {
-	display: flex;
-	flex-direction: column;
-	width: 60%;
-	height: 200px;
-	border: 1px solid #C8C8C8;
+.show {
+	animation: show 0.5s ease-in-out;
+}
+
+@keyframes show {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
 }
 
 div.toolmain {
+	margin-top: 50px;
 	display: flex;
-	align-self: flex-end;
 	flex-direction: column;
+	width: 100%;
+	box-shadow: 6px 2px 60px 2px rgb(225 225 225 / 52%)
+}
+
+div.scoremain {
+	margin-top: 70px;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	box-shadow: 6px 2px 60px 2px rgb(225 225 225 / 52%)
+}
+
+div.divider {
 	width: 40%;
-	height: 200px;
-	border: 1px solid #C8C8C8;
+	height: 1px;
+	margin-top: 10px;
+	background-color: #e0e0e0;
+}
+
+h2.stattitle {
+	font-size: 1.5em;
+	font-weight: 600;
+	margin: 0;
+}
+
+div.infostats, div.infoscore {
+	margin: 20px;
+}
+
+h3.stat {
+	font-size: 1.2em;
+	font-weight: 200;
+	margin-top: 7px;
+	margin-bottom: 7px;
+}
+
+#moyenne, #statowner, #launched {
+	font-weight: 500;
+}
+
+li.scorelist {
+	background-color: #FBFBFB;
+	padding: 20px;
+	margin-top: 20px;
+	font-size: 1.2em;
+	display: flex;
+	min-width: 100%;
+	flex-direction: row;
+	justify-content: space-between;
+	border-radius: 10px;
+}
+
+#scorerank {
+	margin-left: 05px;
+	font-weight: 600;
+}
+
+#scorepseudo {
+	font-weight: 300;
+}
+
+#scorestat {
+	font-weight: 300;
 }

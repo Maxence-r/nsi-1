@@ -7,7 +7,7 @@ license: Aucune
 
 from random import randint # Importation module random
 import requests # Importation request pour envoyer les données au serveur
-
+import webbrowser
 #Initialisation des variables
 characters_tab = []
 dico = {}
@@ -96,7 +96,7 @@ def partieHP():
             score = 11
             essais = 0
             letter = "abcdefghijklmnopqrstuvwxyz"
-            reponse = 'ns'
+            reponse = 'nsi'
             while essais < 11 and reponse != '':
                 choix = letter[randint(0, letter.__len__()-1)]
                 letter = letter.replace(choix, '')
@@ -111,7 +111,6 @@ def partieHP():
             print('Le score global du joueur ', joueur['Name'], ' est de ', globalscore)
         dico[joueur['Name']] = globalscore
     sortdict = sort(dico)
-    print(sortdict)
     moyennejoueurs = moyenne(sortdict)
     request('hp', sortdict, moyennejoueurs)
 
@@ -155,13 +154,13 @@ def request(type, value1, value2):
     '''
     if type == 'hp':
         out = dict(list(value1.items())[0: 4]) 
-        print(out)
         pseudo = input('Les scores vont être envoyés sur le serveur, entrez un pseudo: ')
         url = 'http://localhost:3000/auth/hp'
         x = requests.post(url, json={'content': value1, 'owner': pseudo, 'moyenne': value2, 'first': out})
         print("Copier l'identifiant de votre partie: ", x.text[1:-1])
+        webbrowser.open_new_tab('http://localhost:3000/')
+        
     elif type == 'jj': 
-        print('Envoie pour jj')
         pseudo = input('Les scores vont être envoyés sur le serveur, entrez un pseudo: ')
         url = 'http://localhost:3000/jj'
         x = requests.post(url, json={'owner': pseudo, 'word': value1, 'try': value2})

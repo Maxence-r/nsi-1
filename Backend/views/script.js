@@ -1,5 +1,5 @@
 function gethp() {
-    fetch('https://maxencelearn-miniature-train-rq79j5qq77xfp49g-3000.preview.app.github.dev/hp')
+    fetch(`${location.protocol}//${window.location.host}/hp`)
         .then(response => response.json())
         .then(data => {
             i = 0;
@@ -12,7 +12,7 @@ function gethp() {
                 Object.entries(element.first).forEach(entry => {
                     const [key, value] = entry;
                     li = document.createElement('li');
-                    li.innerHTML = `${key}<span id='score'>${value}</span>`;
+                    li.innerHTML = `${key.substring(0, 24)}<span id='score'>${value}</span>`;
                     boxdiv[0].appendChild(li);
                   });
             });
@@ -23,7 +23,7 @@ gethp();
 
 
 function getjj() {
-    fetch('https://maxencelearn-miniature-train-rq79j5qq77xfp49g-3000.preview.app.github.dev/jj')
+    fetch(`${location.protocol}//${window.location.host}/jj`)
         .then(response => response.json())
         .then(data => {
             i = 0;
@@ -43,12 +43,29 @@ getjj();
 
 function getid() {
     input = document.getElementById('input').value;
-    fetch(`https://maxencelearn-miniature-train-rq79j5qq77xfp49g-3000.preview.app.github.dev/auth/${input}`)
+     fetch(`${location.protocol}//${window.location.host}/auth/${input}`)
         .then(response => response.json())
         .then(data => {
-            if (data.error) return document.getElementById('input').style.border = '1px solid red'
+            if (!data || data.error) return document.getElementById('input').style.border = '1px solid red'
+            document.getElementById('moyenne').innerHTML = data.moyenne;
+            document.getElementById('statowner').innerHTML = data.owner;
             document.getElementById('input').style.border = '1px solid #C8C8C8'
-            console.log(data);   
+            f = 1
+            licheck = document.querySelectorAll('.li');
+            if (licheck) {
+                licheck.forEach(element => {
+                    element.remove();
+                });
+            }
+            for (const [key, value] of Object.entries(data.content)) {
+                let li = document.createElement('li');
+                li.className = 'li';
+                li.innerHTML = `<li class="scorelist"><span id="scorepseudo">${key}<span id="scorerank">#${f}</span></span><span id="scorestat">${value}</span></li>`;
+                document.getElementById('scorelist').appendChild(li);
+                f = f + 1;
+              }
+              document.getElementById('scrollto').style.display = 'flex';
+              document.getElementById('scrollto').scrollIntoView();
         })
 }
 

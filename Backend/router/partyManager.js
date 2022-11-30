@@ -34,7 +34,7 @@ router.post('/auth/hp', (req, res) => {
 router.get('/auth/:id', (req, res) => {
     Party.findOne({ _id: req.params.id })
     .then(party => res.json(party))
-    .catch(error => res.status(400).json({ error }));
+    .catch(error => res.status(400).json({ erreur: 'Aucun résultat' }));
 });
 
 router.post('/jj', (req, res) => {
