@@ -1,6 +1,6 @@
 '''
 coding: utf-8
-author: @Etienne, @Thomas, @Maxence
+authors: @Etienne, @Thomas, @Maxence
 date: 2/12/2022
 license: Aucune
 '''
