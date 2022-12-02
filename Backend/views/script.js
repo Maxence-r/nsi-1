@@ -54,7 +54,12 @@ function getid(par) {
     element.classList.remove("endloaded");
     element.classList.remove("chargement");
     element.classList.add("chargement");
-     fetch(`${location.protocol}//${window.location.host}/auth/${par || document.getElementById('input').value}`)
+    if (!par == '') {
+        fetchurl = `${location.protocol}//${window.location.host}/auth/${par}`;
+    } else {
+        fetchurl = `${location.protocol}//${window.location.host}/auth/${document.getElementById('input').value.substring(1, 50)}`;
+    }
+     fetch(fetchurl)
         // stop if the response is not 200 OK
         .then((response) => {
             if (response.ok) {
