@@ -18,7 +18,7 @@ app.use((req, res, next) => {
 
 app.set('view engine', 'ejs')
 
-mongoose.connect('mongodb+srv://admin:ZVquL33YezZwKesV@cluster0.5vxk0yi.mongodb.net/?retryWrites=true&w=majority', 
+mongoose.connect('urlbasededonneesici', 
 { useNewUrlParser: true, useUnifiedTopology: true })
 .then(() => console.log('Connexion à MongoDB réussie !'))
 .catch(() => console.log('Connexion à MongoDB échouée !'));
