@@ -3,6 +3,7 @@ coding: utf-8
 authors: @Etienne, @Thomas, @Maxence
 date: 2/12/2022
 license: Aucune
+Github: https://github.com/MaxenceLearn/nsi-fullstack
 '''
 
 from random import randint # Importation module random
