@@ -8,46 +8,56 @@
   <title>Pendue</title>
 </head>
 <body>
+  <div id="popup" class="popup">
+    <div class="popupmain">
+      <h1 class="pseudo">Bonjour, <span id="ownerpop">Maxence</span></h1>
+      <p style="margin-bottom: 0;" class="content">Resultat de votre partie: </p>
+      <p class="content">Le mot a trouvé était: <span style="font-weight: 600;" id="wordpop"></span><br>Score de <span id="trypop"></span> obtenue</p>
+      <p class="disclaimer">Les resultats on été sauvegarder sur le serveur (id: <span id="idpop"></span> )</p>
+      <button style="align-self: end; margin-top: 15px;" onclick="closepop()" class="more">Fermer la popup</button>
+    </div>
+  </div>
+  <div class="chargement" id="loaded"></div>
     <div class="main">
       <h1 style="margin-top: 0;" id="topview" class="section">Parties Harry Potter récentes</h1>
       <div class="hp">
         <div class="box">
           <ul class="ullist1">
           </ul>
-          <div class="more">
+          <div id="box1" class="more">
             <div class="row">
                 <img src="./assets/Vector.png" class="iconowner" alt="plus">
                 <h1 id="owner1" class="owner">Undefined</h1>
               </div>
           </div>
         </div>
-        <div  class="box">
+        <div class="box">
           <ul class="ullist2">
             
           </ul>
-          <div class="more">
+          <div id="box2" class="more">
             <div class="row">
                 <img src="./assets/Vector.png" class="iconowner" alt="plus">
                 <h1 id="owner2" class="owner">Undefined</h1>
               </div>
           </div>
         </div>
-        <div  class="box">
+        <div class="box">
           <ul class="ullist3">
             
           </ul>
-          <div class="more">
+          <div id="box3" class="more">
             <div class="row">
                 <img src="./assets/Vector.png" class="iconowner" alt="plus">
                 <h1 id="owner3" class="owner">Undefined</h1>
               </div>
           </div>
         </div>
-        <div  class="box">
+        <div class="box">
           <ul class="ullist4">
            
           </ul>
-          <div class="more">
+          <div id="box4" class="more">
             <div class="row">
                 <img src="./assets/Vector.png" class="iconowner" alt="plus">
                 <h1 id="owner4" class="owner">Undefined</h1>

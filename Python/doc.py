@@ -8,20 +8,13 @@ license: Aucune
 from random import randint # Importation module random
 import requests # Importation request pour envoyer les données au serveur
 import webbrowser
+
+
 #Initialisation des variables
 characters_tab = []
 dico = {}
 sortdict = {}
 moyenne = 0
-
-def main():
-    """
-    Function principal qui lance les actions 1 a 1
-    Valeur d'entrée: Aucune
-    Valeur de sortie: Aucune
-    """
-    loadjoueurs() # Charge les joueurs du csv
-    modeselection() # Choix du mode de jeu
 
 
 def modeselection():
@@ -30,7 +23,7 @@ def modeselection():
     Valeur d'entrée: Aucune
     Valeur de sortie: Aucune
     '''
-    mode = input('Choisissez le mode de jeu (Harry Potter(HP) ou Je joue(JJ)): ')
+    mode = input('Choisissez le mode de jeu (Harry Potter(HP) ou Je joue(JJ)): ') 
     if mode == 'HP' or mode == 'Harry Potter':
         print('Vous avez choisi le mode "Harry Potter"')
         partieHP()
@@ -39,25 +32,25 @@ def modeselection():
         partieJJ()
     else:
         print('Vous n\'avez pas choisi un mode valide')
-        modeselection()
+        modeselection() #relance si le mode de jeu n'est pas valide
 
 def loadjoueurs():
     '''
     Fonction qui charge les joueurs
     Valeur d'entrée: Aucune
-    Valeur de sortie: Aucune
+    Valeur de sortie: Dictionnaire
     '''
-    global characters_tab
     with open('Characters.csv', mode='r', encoding='utf-8') as f:
-        lines = f.readlines()
+        lines = f.readlines() #Lecture des lignes du fichier
         key_line = lines[0].strip()
-        keys = key_line.split(";")
-        for line in lines[1:]:
+        keys = key_line.split(";") 
+        for line in lines[1:]: #Pour chaque ligne du fichier
             line = line.strip()
             values = line.split(';') 
             dico = {}
             dico[keys[1]] = values[1]
             characters_tab.append(dico)
+        return characters_tab #Retourne le tableau de dictionnaires
 
 def partieJJ():
     '''
@@ -65,24 +58,23 @@ def partieJJ():
     Valeur d'entrée: Aucune
     Valeur de sortie: Aucune
     '''
-    listjoueurs = ['fleur', 'tournevis', 'nsi', 'chemin']
-    correct = listjoueurs[randint(0, listjoueurs.__len__()-1)]
+    listmots = ['fleur', 'tournevis', 'nsi', 'chemin'] #Liste des mots qui peuvent être choisis
+    correct = listmots[randint(0, listmots.__len__()-1)]
     finalcorrect = correct
-    score = 11
-    print(correct)
-    display = '_'*correct.__len__()
-    while score != 0 and correct != '':
+    score = 11 #Score initial
+    display = '_'*correct.__len__() #Affichage initial
+    while score != 0 and correct != '': #Tant que le score n'est pas à 0 et que le mot n'est pas trouvé
         print(display)
         reponse = input('Entrer une lettre ? ')
         if reponse in correct and reponse.__len__() < 2:
             indice = finalcorrect.find(reponse)
-            display = display[:indice] + reponse + display[indice+1:] # do it for all occurences
+            display = display[:indice] + reponse + display[indice+1:] 
             correct = correct.replace(reponse, '')
         else:
             print('Ce n\'est pas la bonne lettre il vous reste', score-1, "essais")
             score -= 1
     print('\033[92mVous avez gagné !')
-    request('jj', finalcorrect, score)
+    request('jj', finalcorrect, score) #Envoie les données au serveur avec les paramètres
 
 def partieHP():
     '''
@@ -90,29 +82,26 @@ def partieHP():
     Valeur d'entrée: Aucune
     Valeur de sortie: Aucune
     '''
-    for joueur in characters_tab:
-        globalscore = 0
-        for _ in range(10):
+    for joueur in loadjoueurs(): #Pour chaque joueur
+        globalscore = 0 #Score incrementé a chaque partie pour chaque joueur
+        for _ in range(10): #10 parties
             score = 11
             essais = 0
-            letter = "abcdefghijklmnopqrstuvwxyz"
+            letter = "abcdefghijklmnopqrstuvwxyz" #Liste des lettres
             reponse = 'nsi'
             while essais < 11 and reponse != '':
-                choix = letter[randint(0, letter.__len__()-1)]
-                letter = letter.replace(choix, '')
+                choix = letter[randint(0, letter.__len__()-1)] #Choix d'une lettre au hasard
+                letter = letter.replace(choix, '') #Suppression de la lettre choisie
                 if choix in reponse:
-                    reponse = reponse.replace(choix, '')
-                    print('Le personnage est ', joueur['Name'], ' et le score est de ', score, 'avec', choix)
+                    reponse = reponse.replace(choix, '') #Suppression de la lettre choisie dans le mot
                 else:
                     score -= 1
                     essais += 1
-                    print('Le personnage est ', joueur['Name'], ' et le score est de ', score, 'sans', choix, 'IL RESTE', 11-essais, 'ESSAIS')
-            globalscore += score
-            print('Le score global du joueur ', joueur['Name'], ' est de ', globalscore)
-        dico[joueur['Name']] = globalscore
+            globalscore += score #Ajout du score de la partie au score global du joueur
+        dico[joueur['Name']] = globalscore #Ajout du score global du joueur au dictionnaire
     sortdict = sort(dico)
-    moyennejoueurs = moyenne(sortdict)
-    request('hp', sortdict, moyennejoueurs)
+    moyennejoueurs = moyenne(sortdict) #Calcul de la moyenne des joueurs
+    request('hp', sortdict, moyennejoueurs) #Envoie les données au serveur avec les paramètres
 
 def sort(dico):
     '''
@@ -120,7 +109,7 @@ def sort(dico):
     Valeur d'entrée: Dictionnaire
     Valeur de sortie: Dictionnaire trié
     '''
-    convertedlist = list(dico.items())
+    convertedlist = list(dico.items())  # Convertir le dictionnaire en liste
     l = len(convertedlist)
     for i in range(l-1):
         for j in range(i+1,l):
@@ -139,11 +128,11 @@ def moyenne(sortdict):
     Valeur d'entrée: Dictionnaire
     Valeur de sortie: Entier
     '''
-    somme = 0
+    somme = 0 
     for joueur in sortdict:
-        somme += sortdict[joueur]
-    moyenne = somme/len(sortdict)
-    result = ("%.2f" % round(moyenne, 2))
+        somme += sortdict[joueur] #Somme des scores
+    moyenne = somme/len(sortdict) #Moyenne des scores
+    result = ("%.2f" % round(moyenne, 2)) #Arrondi a 2 chiffres apres la virgule
     return result
 
 def request(type, value1, value2):
@@ -153,16 +142,19 @@ def request(type, value1, value2):
     Valeur de sortie: Aucune
     '''
     if type == 'hp':
-        out = dict(list(value1.items())[0: 4]) 
-        pseudo = input('Les scores vont être envoyés sur le serveur, entrez un pseudo: ')
-        url = 'http://localhost:3000/auth/hp'
-        x = requests.post(url, json={'content': value1, 'owner': pseudo, 'moyenne': value2, 'first': out})
-        print("Copier l'identifiant de votre partie: ", x.text[1:-1])
-        webbrowser.open_new_tab('http://localhost:3000/')
+        out = dict(list(value1.items())[0: 4])  # On ne prend que les 4 premiers joueurs
+        pseudo = input('Les scores vont être envoyés sur le serveur, entrez un pseudo: ') #Demande du pseudo
+        url = 'https://nsi1.maxence.live/auth/hp' #URL du serveur
+        x = requests.post(url, json={'content': value1, 'owner': pseudo, 'moyenne': value2, 'first': out})  # Envoie des données au serveur
+        print("Copier l'identifiant de votre partie: ", x.text[1:-1]) #Affichage de l'identifiant de la partie
+        webbrowser.open_new_tab('https://nsi1.maxence.live/') #Ouverture de la page web
         
     elif type == 'jj': 
-        pseudo = input('Les scores vont être envoyés sur le serveur, entrez un pseudo: ')
-        url = 'http://localhost:3000/jj'
-        x = requests.post(url, json={'owner': pseudo, 'word': value1, 'try': value2})
-        print("Copier l'identifiant de votre partie: ", x.text[1:-1])
-main() # initialisation du jeu
+        pseudo = input('Les scores vont être envoyés sur le serveur, entrez un pseudo: ') #Demande du pseudo
+        url = 'https://nsi1.maxence.live/jj' #URL du serveur
+        x = requests.post(url, json={'owner': pseudo, 'word': value1, 'try': value2}) # Envoie des données au serveur
+        webbrowser.open_new_tab('https://nsi1.maxence.live?owner='+pseudo+'&word='+value1+'&try='+ str(value2) +'&id='+x.text[1:-1]) #Ouverture de la page web
+        print("Rendez vous sur: "+'https://nsi1.maxence.live?owner='+pseudo+'&word='+value1+'&try='+ str(value2) +'&id='+x.text[1:-1]) #Affichage de l'URL de la partie
+ 
+
+modeselection() # Choix du mode de jeu # initialisation du jeu
