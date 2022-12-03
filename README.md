@@ -11,4 +11,4 @@ le module suivant est nécéssaire pour qu'il fonctionne correctement;
 Dossier 'Backend' contient plusieurs fichiers permettant le fonctionnement d'un server expressjs ainsi le traitement des données envoyé depuis
 le fichier python et les enregistrer dans une base de données mongodb.
 
-Le serveur est déja démarré a l'adresse: https://url.maxence.live et ne nécéssite pas d'action de votre part.
+Le serveur est déja démarré a l'adresse: https://nsi1.maxence.live et ne nécéssite pas d'action de votre part.
